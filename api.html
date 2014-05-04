@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <!--Importando API google Maps e arquivo js com as fuções para manipulação e calculo das rotas-->
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+        <script src="../../js/jquery.js"></script> 
+        <script type="text/javascript" src = "rotasApiGoogleMaps.js"></script>
+        <script type="text/javascript" src = "rotas.js"></script>
+        <script type="text/javascript">
+            function concluirPopup() {
+                tb_remove();
+            }
+        </script>
+        <style type="text/css">
+            html { height: 100% }
+            body { height: 100%; margin: 0; padding: 0 }
+            #map_canvas { height: 100% }
+        </style>
+
+    </head>
+
+    <body>
+        Origem:
+        <input id="searchTextField1" type="text" size="25" placeholder="Cidade origem" autocomplete="off" onkeyup="autoCompletar(this,false)">
+        Destino:
+        <input id="searchTextField2" type="text" size="25" placeholder="Cidade destino" autocomplete="off" onkeyup="autoCompletar(this,false)">
+        </br>        
+        Adicionar Paradas:
+        <input id="pontoParada" title="text" size="25" placeholder="Digite os pontos de parada aqui!" autocomplete="off" onkeyup="autoCompletar(this,false)">
+        <input type="button" value="Adicionar Parada" name="btAdicionar" onclick="adiscionaParada();"/>
+        <input type="checkbox" id="cbPedagio" name="cbPedagio" value="true" />Evitar Pedágio
+        <input type="button" value="Calcular" name="btCalcular" onclick="tracaRotas('searchTextField1','searchTextField2');" /> 
+        <input type="button" id="btnConcluir" value="Concluir" onclick="getRota(document.getElementById('searchTextField1').value);"/>
+        <div id="map_canvas" style=" float:left; width:70%; height:100%" align="center"></div>        
+        <span id="km_total" ></span>
+        <span id="frase" style="display:none">Km de distãncia</span>
+        <div id="tbParadas" style="float:right;width: 30%; height: 30%">
+            <table>
+                <tr>
+                    <td>
+                        <b>Pontos de Parada.</b>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="ptParada1"></span>
+                    </td>
+                    <td>
+                        <img id="imgParada1" src="../images/excluir.png" width="19" height="19" alt="excluir" onclick="removeParada(0)" style="display: none;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span  id="ptParada2"></span>
+                    </td>
+                    <td>
+                        <img id="imgParada2" src="../images/excluir.png" width="19" height="19" alt="excluir" onclick="removeParada(1)" style="display: none;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        <span id="ptParada3"></span>
+                    </td>
+                    <td>
+                        <img id="imgParada3" src="../images/excluir.png" width="19" height="19" alt="excluir" onclick="removeParada(2)" style="display: none;"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="directionsPanel" style="float:right; width:30%;height:80%; z-index:1; overflow:auto"></div>
+    </body>
+
+</html>
